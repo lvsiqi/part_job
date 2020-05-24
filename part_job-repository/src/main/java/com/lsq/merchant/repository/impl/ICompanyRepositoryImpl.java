@@ -20,8 +20,9 @@ public class ICompanyRepositoryImpl implements ICompanyRepository {
     public int updateByAccountSelective(Company record) {
         return companyMapper.updateByAccountSelective(record);
     }
+
     @Override
-    public Company selectByAccount(String account){
+    public Company selectByAccount(String account) {
         return companyMapper.selectByAccount(account);
     }
 }

@@ -7,5 +7,5 @@ public interface ICompanyRepository {
 
     int updateByAccountSelective(Company record);
 
-    Company  selectByAccount(String account);
+    Company selectByAccount(String account);
 }

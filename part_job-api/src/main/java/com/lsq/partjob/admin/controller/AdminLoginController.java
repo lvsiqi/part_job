@@ -12,19 +12,17 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.lsq.constants.LoginConstants.*;
+
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/5/6 16:20
-
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/5/6 16:20
  */
 @Controller
 @RequestMapping(value = "/admin")
@@ -34,15 +32,14 @@ public class AdminLoginController {
 
     @RequestMapping("login")
     @ResponseBody
-    public BaseResponse  Login(@RequestBody  @Valid Admin admin, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+    public BaseResponse Login(@RequestBody @Valid Admin admin, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             List<String> errorList = new ArrayList<String>();
-            for(FieldError error : bindingResult.getFieldErrors())
-            {
+            for (FieldError error : bindingResult.getFieldErrors()) {
                 errorList.add(error.getDefaultMessage());
             }
-            return new LoginResponse(LOGIN_FAIL_KEY, new AdminLoginReturn(admin.getAccount(),UNREGISTERED_ROLE_KEY,errorList.toString()));
+            return new LoginResponse(LOGIN_FAIL_KEY, new AdminLoginReturn(admin.getAccount(), UNREGISTERED_ROLE_KEY, errorList.toString()));
         }
-            return adminService.adminLoginCheck(admin);
+        return adminService.adminLoginCheck(admin);
     }
 }

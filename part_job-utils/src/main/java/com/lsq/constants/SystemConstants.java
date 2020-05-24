@@ -1,12 +1,9 @@
 package com.lsq.constants;
+
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/4/6 13:56
- 
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/4/6 13:56
  */
 public interface SystemConstants {
     String SYSTEM_SUCCESS_KEY = "successful";

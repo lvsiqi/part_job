@@ -3,6 +3,7 @@ package com.lsq.merchant.domain;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class Merchant {
     private Long id;
@@ -31,4 +32,4 @@ public class Merchant {
 
     private Date updateTime;
 
-   }
+}

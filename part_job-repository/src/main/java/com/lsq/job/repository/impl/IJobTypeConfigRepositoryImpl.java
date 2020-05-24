@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public class IJobTypeConfigRepositoryImpl implements IJobTypeConfigRepository {
     @Autowired
     private JobTypeConfigMapper jobTypeConfigMapper;
+
     @Override
     public int deleteByPrimaryKey(Long id) {
         return jobTypeConfigMapper.deleteByPrimaryKey(id);

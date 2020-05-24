@@ -8,6 +8,7 @@ import com.lsq.basebean.baseresponse.LoginResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import static com.lsq.constants.LoginConstants.*;
 
 @Service
@@ -36,7 +37,7 @@ public class IAdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public LoginResponse adminLoginCheck( Admin admin) {
+    public LoginResponse adminLoginCheck(Admin admin) {
         Admin result = adminRepository.selectByAccount(admin.getAccount());
         if (result == null) {
             AdminLoginReturn adminLoginReturn = new AdminLoginReturn(admin.getAccount(), UNREGISTERED_ROLE_KEY, LOGIN_ERROR_001);

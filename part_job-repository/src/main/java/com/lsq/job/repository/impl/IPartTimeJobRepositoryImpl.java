@@ -40,7 +40,7 @@ public class IPartTimeJobRepositoryImpl implements IPartTimeJobRepository {
     }
 
     @Override
-    public int selectCountByAccount (String account){
+    public int selectCountByAccount(String account) {
         return partTimeJobMapper.selectCountByAccount(account);
     }
 

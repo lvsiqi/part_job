@@ -12,7 +12,7 @@ public interface CompanyMapper {
 
     Company selectByPrimaryKey(Long id);
 
-    Company  selectByAccount(String account);
+    Company selectByAccount(String account);
 
     int updateByPrimaryKeySelective(Company record);
 

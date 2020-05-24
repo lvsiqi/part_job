@@ -1,4 +1,5 @@
 package com.lsq.partjob.websocket.controller;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lsq.message.domain.MyMessages;
@@ -7,21 +8,22 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
+
 @ServerEndpoint("/websocket/{id}")
 @Component
 /**
+ * @Description: java类作用描述
 
- * @Description:    java类作用描述
+ * @Author: lvsiqi
 
- * @Author:         lvsiqi
+ * @CreateDate: 2019/5/11 23:45
 
- * @CreateDate:     2019/5/11 23:45
- 
  */
 public class WebSocketServer {
     @Autowired
@@ -35,9 +37,10 @@ public class WebSocketServer {
     private Session session;
     private static Logger log = LogManager.getLogger(WebSocketServer.class);
     private String id = "";
+
     /**
      * 连接建立成功调用的方法
-     * */
+     */
     @OnOpen
     public void onOpen(@PathParam(value = "id") String id, Session session) {
         this.session = session;
@@ -50,7 +53,7 @@ public class WebSocketServer {
          * 在线数加1
          */
         addOnlineCount();
-        log.info("用户"+id+"加入！当前在线人数为" + getOnlineCount());
+        log.info("用户" + id + "加入！当前在线人数为" + getOnlineCount());
         /*try {
            sendMessage("连接成功");
         } catch (IOException e) {
@@ -71,7 +74,8 @@ public class WebSocketServer {
     /**
      * 收到客户端消息后调用的方法
      *
-     * @param message 客户端发送过来的消息*/
+     * @param message 客户端发送过来的消息
+     */
     @OnMessage
     public void onMessage(String message, Session session) {
        /* log.info("来自客户端的消息:" + message);
@@ -93,7 +97,6 @@ public class WebSocketServer {
     }
 
     /**
-     *
      * @param session
      * @param error
      */
@@ -110,10 +113,11 @@ public class WebSocketServer {
 
     /**
      * 发送信息给指定ID用户，如果用户不在线则返回不在线信息给自己
+     *
      * @param message
      * @throws IOException
      */
-    public static void sendInfo(MyMessages message)  {
+    public static void sendInfo(MyMessages message) {
         if (webSocketSet.get(message.getAcceptAccount()) != null) {
             try {
                 webSocketSet.get(message.getAcceptAccount()).sendMessage(JSON.toJSONString(message));

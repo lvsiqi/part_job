@@ -22,13 +22,9 @@ import static com.lsq.constants.UserConstants.JOB_APPLY_ERROR_001;
 import static com.lsq.constants.UserConstants.JOB_APPLY_FAIL;
 
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/5/6 16:14
-
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/5/6 16:14
  */
 @Service
 public class IApplyForJobServiceImpl implements IApplyForJobService {
@@ -36,32 +32,32 @@ public class IApplyForJobServiceImpl implements IApplyForJobService {
     private IApplyForJobRepository applyForJobRepository;
     @Autowired
     private IPartTimeJobRepository partTimeJobRepository;
+
     @Override
     public SystemResponse applyJob(ApplyForJob applyForJob) {
         applyForJob.setCreateTime(new Date());
-        if(applyForJobRepository.selectByPrimaryKeyAndUserAccount(applyForJob) != null){
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,JOB_APPLY_ERROR_001);
+        if (applyForJobRepository.selectByPrimaryKeyAndUserAccount(applyForJob) != null) {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, JOB_APPLY_ERROR_001);
         }
-        if(applyForJobRepository.insertSelective(applyForJob)  == 1)
-        {
-            return new SystemResponse<>(SYSTEM_SUCCESS_KEY,applyForJob);
-        }else {
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,JOB_APPLY_FAIL);
+        if (applyForJobRepository.insertSelective(applyForJob) == 1) {
+            return new SystemResponse<>(SYSTEM_SUCCESS_KEY, applyForJob);
+        } else {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, JOB_APPLY_FAIL);
         }
     }
 
     @Override
     public BaseResponse selectApplyBySearchFactor(QueryApplyJob queryApplyJob) {
         queryApplyJob.setLimitStart((queryApplyJob.getPageNum() - 1) * queryApplyJob.getPageSize());
-        int total =  applyForJobRepository.selectCountBySearchFactor(queryApplyJob);
+        int total = applyForJobRepository.selectCountBySearchFactor(queryApplyJob);
         List<ApplyForJob> applys = applyForJobRepository.selectBySearchFactor(queryApplyJob);
         List<ApplyJobReturn> results = new ArrayList<>();
-        for (ApplyForJob applyForJob : applys){
-            ApplyJobReturn applyJobReturn =new ApplyJobReturn();
+        for (ApplyForJob applyForJob : applys) {
+            ApplyJobReturn applyJobReturn = new ApplyJobReturn();
             applyJobReturn.setApplyForJob(applyForJob);
             applyJobReturn.setPartTimeJob(partTimeJobRepository.selectByPrimaryKey(applyForJob.getJobId()));
             results.add(applyJobReturn);
         }
-        return new SystemResponse<>(SYSTEM_SUCCESS_KEY,new ApplyJobPage(total,results));
+        return new SystemResponse<>(SYSTEM_SUCCESS_KEY, new ApplyJobPage(total, results));
     }
 }

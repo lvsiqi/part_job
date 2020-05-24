@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public class IMyMessagesRepositoryImpl implements IMyMessagesRepository {
     @Autowired
     private MyMessagesMapper myMessagesMapper;
+
     @Override
     public int deleteByPrimaryKey(Long id) {
         return myMessagesMapper.deleteByPrimaryKey(id);

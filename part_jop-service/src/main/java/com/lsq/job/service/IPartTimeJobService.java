@@ -8,14 +8,11 @@ import com.lsq.job.bean.QueryPageBean;
 import com.lsq.job.domain.PartTimeJob;
 
 import java.util.List;
+
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/4/24 9:41
-
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/4/24 9:41
  */
 public interface IPartTimeJobService {
     BaseResponse addPartTimeJob(PartTimeJob partTimeJob);

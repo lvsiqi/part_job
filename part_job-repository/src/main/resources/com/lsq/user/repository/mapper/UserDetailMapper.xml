@@ -11,8 +11,8 @@
         <result column="evaluation" property="evaluation" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, account, hobby, speciality, label, experience, evaluation
-  </sql>
+        id, account, hobby, speciality, label, experience, evaluation
+    </sql>
     <select id="selectByAccount" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
@@ -20,17 +20,17 @@
         where account = #{account,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByAccount" parameterType="java.lang.String">
-    delete from user_detail
-    where account = #{account,jdbcType=VARCHAR}
-  </delete>
+        delete from user_detail
+        where account = #{account,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.lsq.user.domain.UserDetail">
-    insert into user_detail (id, account, hobby, 
-      speciality, label, experience, 
-      evaluation)
-    values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, 
-      #{speciality,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, #{experience,jdbcType=VARCHAR}, 
-      #{evaluation,jdbcType=VARCHAR})
-  </insert>
+        insert into user_detail (id, account, hobby,
+        speciality, label, experience,
+        evaluation)
+        values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR},
+        #{speciality,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, #{experience,jdbcType=VARCHAR},
+        #{evaluation,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.lsq.user.domain.UserDetail">
         insert into user_detail
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -105,12 +105,12 @@
         where account = #{account,jdbcType=VARCHAR}
     </update>
     <update id="updateByAccount" parameterType="com.lsq.user.domain.UserDetail">
-    update user_detail
-    set hobby = #{hobby,jdbcType=VARCHAR},
-      speciality = #{speciality,jdbcType=VARCHAR},
-      label = #{label,jdbcType=VARCHAR},
-      experience = #{experience,jdbcType=VARCHAR},
-      evaluation = #{evaluation,jdbcType=VARCHAR}
-    where account = #{account,jdbcType=VARCHAR}
-  </update>
+        update user_detail
+        set hobby = #{hobby,jdbcType=VARCHAR},
+        speciality = #{speciality,jdbcType=VARCHAR},
+        label = #{label,jdbcType=VARCHAR},
+        experience = #{experience,jdbcType=VARCHAR},
+        evaluation = #{evaluation,jdbcType=VARCHAR}
+        where account = #{account,jdbcType=VARCHAR}
+    </update>
 </mapper>

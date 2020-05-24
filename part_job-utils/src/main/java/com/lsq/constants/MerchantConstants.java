@@ -1,12 +1,9 @@
 package com.lsq.constants;
+
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/3/25 11:18
-
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/3/25 11:18
  */
 public interface MerchantConstants {
     String MERCHANT_REGISTER_ERROR_001 = "账户已存在";

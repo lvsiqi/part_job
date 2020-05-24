@@ -6,7 +6,7 @@ import com.lsq.user.bean.QueryApplyJob;
 import com.lsq.user.domain.ApplyForJob;
 
 public interface IApplyUserService {
-   BaseResponse searchApplyUserByFactor(QueryApplyJob queryApplyJob);
+    BaseResponse searchApplyUserByFactor(QueryApplyJob queryApplyJob);
 
-   SystemResponse updateApply(ApplyForJob applyForJob);
+    SystemResponse updateApply(ApplyForJob applyForJob);
 }

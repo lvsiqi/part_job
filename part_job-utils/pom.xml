@@ -10,5 +10,5 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>part_job-utils</artifactId>
-<packaging>jar</packaging>
+    <packaging>jar</packaging>
 </project>

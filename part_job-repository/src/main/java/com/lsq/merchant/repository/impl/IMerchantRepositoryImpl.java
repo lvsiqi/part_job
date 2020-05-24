@@ -10,8 +10,9 @@ import org.springframework.stereotype.Repository;
 public class IMerchantRepositoryImpl implements IMerchantRepository {
     @Autowired
     private MerchantMapper merchantMapper;
+
     @Override
-    public int deleteByPrimaryKey(Long id){
+    public int deleteByPrimaryKey(Long id) {
         return merchantMapper.deleteByPrimaryKey(id);
     }
 
@@ -31,7 +32,7 @@ public class IMerchantRepositoryImpl implements IMerchantRepository {
     }
 
     @Override
-    public  Merchant selectByAccount(String account){
+    public Merchant selectByAccount(String account) {
         return merchantMapper.selectByAccount(account);
     }
 

@@ -24,10 +24,11 @@
         <result column="job_end_time" property="endTime" jdbcType="TIME"/>
     </resultMap>
     <sql id="Base_Column_List">
-    t1.id, t2.name, t2.scale, job_name, job_account, t1.job_type, job_work, job_require,job_area, job_address, job_salary,
-    job_pay_method, job_people_num, job_start_time, job_describe, job_create_time, job_update_time, 
-    job_nature, job_state, job_end_time
-  </sql>
+        t1.id, t2.name, t2.scale, job_name, job_account, t1.job_type, job_work, job_require,job_area, job_address,
+        job_salary,
+        job_pay_method, job_people_num, job_start_time, job_describe, job_create_time, job_update_time,
+        job_nature, job_state, job_end_time
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -44,11 +45,11 @@
     </select>
 
     <select id="selectCountByName" resultType="Integer" parameterType="java.lang.String">
-    select
-    count(*)
-    from part_time_job
-    where job_name like '%${jobName}%'
-  </select>
+        select
+        count(*)
+        from part_time_job
+        where job_name like '%${jobName}%'
+    </select>
 
     <select id="selectPageAll" resultMap="BaseResultMap" parameterType="com.lsq.job.bean.QueryPageBean">
         select
@@ -59,17 +60,17 @@
     </select>
 
     <select id="selectCountAll" resultType="Integer">
-    select
-    count(*)
-    from part_time_job
-  </select>
+        select
+        count(*)
+        from part_time_job
+    </select>
 
     <select id="selectCountByAccount" resultType="Integer" parameterType="java.lang.String">
-    select
-    count(*)
-    from part_time_job
-    where job_account = #{account,jdbcType=VARCHAR}
-  </select>
+        select
+        count(*)
+        from part_time_job
+        where job_account = #{account,jdbcType=VARCHAR}
+    </select>
 
     <select id="selectPageByAccount" resultMap="BaseResultMap" parameterType="com.lsq.job.bean.QueryPageBean">
         select
@@ -121,10 +122,10 @@
             </if>
         </if>
         <if test="jobType != null and jobType != '' ">
-           and t1.job_type = #{jobType,jdbcType=VARCHAR}
+            and t1.job_type = #{jobType,jdbcType=VARCHAR}
         </if>
         <if test="jobArea != null and jobArea != '' ">
-           and job_area = #{jobArea,jdbcType=VARCHAR}
+            and job_area = #{jobArea,jdbcType=VARCHAR}
         </if>
         <if test="jobPayMethod != null and jobPayMethod != '' ">
             and job_pay_method = #{jobPayMethod,jdbcType=VARCHAR}
@@ -142,23 +143,23 @@
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from part_time_job
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from part_time_job
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" parameterType="com.lsq.job.domain.PartTimeJob">
-    insert into part_time_job (id, job_name, job_account, 
-      job_type, job_work, job_require, job_area,
-      job_address, job_salary, job_pay_method, 
-      job_people_num, job_start_time, job_describe, 
-      job_create_time, job_update_time, job_nature, 
-      job_state, job_end_time)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR},
-      #{type,jdbcType=VARCHAR}, #{work,jdbcType=VARCHAR}, #{require,jdbcType=VARCHAR},#{area,jdbcType = VARCHAR},
-      #{address,jdbcType=VARCHAR}, #{salary,jdbcType=VARCHAR}, #{payMethod,jdbcType=VARCHAR},
-      #{peopleNum,jdbcType=INTEGER}, #{startTime,jdbcType=TIME}, #{describe,jdbcType=VARCHAR},
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{jobNature,jdbcType=VARCHAR},
-      #{state,jdbcType=VARCHAR}, #{endTime,jdbcType=TIME})
-  </insert>
+        insert into part_time_job (id, job_name, job_account,
+        job_type, job_work, job_require, job_area,
+        job_address, job_salary, job_pay_method,
+        job_people_num, job_start_time, job_describe,
+        job_create_time, job_update_time, job_nature,
+        job_state, job_end_time)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR},
+        #{type,jdbcType=VARCHAR}, #{work,jdbcType=VARCHAR}, #{require,jdbcType=VARCHAR},#{area,jdbcType = VARCHAR},
+        #{address,jdbcType=VARCHAR}, #{salary,jdbcType=VARCHAR}, #{payMethod,jdbcType=VARCHAR},
+        #{peopleNum,jdbcType=INTEGER}, #{startTime,jdbcType=TIME}, #{describe,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{jobNature,jdbcType=VARCHAR},
+        #{state,jdbcType=VARCHAR}, #{endTime,jdbcType=TIME})
+    </insert>
     <insert id="insertSelective" parameterType="com.lsq.job.domain.PartTimeJob" useGeneratedKeys="true"
             keyProperty="id">
         insert into part_time_job
@@ -333,24 +334,24 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.lsq.job.domain.PartTimeJob">
-    update part_time_job
-    set job_name = #{name,jdbcType=VARCHAR},
-      job_account = #{account,jdbcType=VARCHAR},
-      job_type = #{type,jdbcType=VARCHAR},
-      job_work = #{work,jdbcType=VARCHAR},
-      job_require = #{require,jdbcType=VARCHAR},
-      job_area = #{area,jdbcType=VARCHAR},
-      job_address = #{address,jdbcType=VARCHAR},
-      job_salary = #{salary,jdbcType=VARCHAR},
-      job_pay_method = #{payMethod,jdbcType=VARCHAR},
-      job_people_num = #{peopleNum,jdbcType=INTEGER},
-      job_start_time = #{startTime,jdbcType=TIME},
-      job_describe = #{describe,jdbcType=VARCHAR},
-      job_create_time = #{createTime,jdbcType=TIMESTAMP},
-      job_update_time = #{updateTime,jdbcType=TIMESTAMP},
-      job_nature = #{jobNature,jdbcType=VARCHAR},
-      job_state = #{state,jdbcType=VARCHAR},
-      job_end_time = #{endTime,jdbcType=TIME}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update part_time_job
+        set job_name = #{name,jdbcType=VARCHAR},
+        job_account = #{account,jdbcType=VARCHAR},
+        job_type = #{type,jdbcType=VARCHAR},
+        job_work = #{work,jdbcType=VARCHAR},
+        job_require = #{require,jdbcType=VARCHAR},
+        job_area = #{area,jdbcType=VARCHAR},
+        job_address = #{address,jdbcType=VARCHAR},
+        job_salary = #{salary,jdbcType=VARCHAR},
+        job_pay_method = #{payMethod,jdbcType=VARCHAR},
+        job_people_num = #{peopleNum,jdbcType=INTEGER},
+        job_start_time = #{startTime,jdbcType=TIME},
+        job_describe = #{describe,jdbcType=VARCHAR},
+        job_create_time = #{createTime,jdbcType=TIMESTAMP},
+        job_update_time = #{updateTime,jdbcType=TIMESTAMP},
+        job_nature = #{jobNature,jdbcType=VARCHAR},
+        job_state = #{state,jdbcType=VARCHAR},
+        job_end_time = #{endTime,jdbcType=TIME}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

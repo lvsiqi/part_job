@@ -19,12 +19,13 @@ import static com.lsq.constants.Message.MESSAGE_STATE_UNREAD;
 public class MySocketController {
     @Autowired
     private IMessageService messageService;
+
     @RequestMapping("/publish")
     @ResponseBody
-    public void publish(@RequestBody MyMessages myMessages){
+    public void publish(@RequestBody MyMessages myMessages) {
         myMessages.setCreateTime(new Date());
         myMessages.setState(MESSAGE_STATE_UNREAD);
-            WebSocketServer.sendInfo(myMessages);
-             messageService.add(myMessages);
+        WebSocketServer.sendInfo(myMessages);
+        messageService.add(myMessages);
     }
 }

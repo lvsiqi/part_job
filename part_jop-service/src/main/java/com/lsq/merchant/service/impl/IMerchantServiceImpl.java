@@ -24,14 +24,11 @@ import java.util.Date;
 import static com.lsq.constants.LoginConstants.*;
 import static com.lsq.constants.MerchantConstants.*;
 import static com.lsq.constants.SystemConstants.*;
+
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/3/25 10:53
-
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/3/25 10:53
  */
 @Service
 public class IMerchantServiceImpl implements IMerchantService {
@@ -41,6 +38,7 @@ public class IMerchantServiceImpl implements IMerchantService {
     private ICompanyRepository companyRepository;
     @Autowired
     private IUserRepository userRepository;
+
     @Override
     public int deleteByID(Long id) {
         return merchantRepository.deleteByPrimaryKey(id);
@@ -53,19 +51,17 @@ public class IMerchantServiceImpl implements IMerchantService {
 
     @Override
     public SystemResponse merchantRegister(Merchant record) {
-        Merchant db =merchantRepository.selectByAccount(record.getAccount());
+        Merchant db = merchantRepository.selectByAccount(record.getAccount());
         User db2 = userRepository.selectByAccount(record.getAccount());
-        if(db != null || db2 != null)
-        {
-            return new SystemResponse(SYSTEM_FAIL_KEY,new MerchantCommonReturn(record.getAccount(),MERCHANT_REGISTER_ERROR_001));
+        if (db != null || db2 != null) {
+            return new SystemResponse(SYSTEM_FAIL_KEY, new MerchantCommonReturn(record.getAccount(), MERCHANT_REGISTER_ERROR_001));
         }
         record.setState(MERCHANT_STATE_001);
         record.setCreateTime(new Date());
-        if(merchantRepository.insertSelective(record) == 1){
-            return new SystemResponse(SYSTEM_SUCCESS_KEY,new MerchantCommonReturn(record.getAccount(),MERCHANT_REGISTER_SUCESS));
-        }
-        else {
-            return new SystemResponse(SYSTEM_FAIL_KEY,new MerchantCommonReturn(record.getAccount(),MERCHANT_REGISTER_FAIL));
+        if (merchantRepository.insertSelective(record) == 1) {
+            return new SystemResponse(SYSTEM_SUCCESS_KEY, new MerchantCommonReturn(record.getAccount(), MERCHANT_REGISTER_SUCESS));
+        } else {
+            return new SystemResponse(SYSTEM_FAIL_KEY, new MerchantCommonReturn(record.getAccount(), MERCHANT_REGISTER_FAIL));
         }
     }
 
@@ -78,18 +74,18 @@ public class IMerchantServiceImpl implements IMerchantService {
     public LoginResponse merchantLoginCheck(Merchant merchant) {
         Merchant result = merchantRepository.selectByAccount(merchant.getAccount());
         Company company = companyRepository.selectByAccount(merchant.getAccount());
-        if(company == null) {
+        if (company == null) {
             company = new Company();
         }
         if (result == null) {
-            MerchantLoginReturn merchantLoginReturn = new MerchantLoginReturn(merchant.getAccount(), UNREGISTERED_ROLE_KEY, LOGIN_ERROR_001,null,null);
+            MerchantLoginReturn merchantLoginReturn = new MerchantLoginReturn(merchant.getAccount(), UNREGISTERED_ROLE_KEY, LOGIN_ERROR_001, null, null);
             return new LoginResponse(LOGIN_FAIL_KEY, merchantLoginReturn);
         }
         if (StringUtils.equals(merchant.getPassword(), result.getPassword())) {
-            MerchantLoginReturn merchantLoginReturn = new MerchantLoginReturn(merchant.getAccount(), MERCHANT_ROLE_KEY, LOGIN_SUCCESS_DESCRIPTION,result,company);
+            MerchantLoginReturn merchantLoginReturn = new MerchantLoginReturn(merchant.getAccount(), MERCHANT_ROLE_KEY, LOGIN_SUCCESS_DESCRIPTION, result, company);
             return new LoginResponse(LOGIN_SUCCESS_KEY, merchantLoginReturn);
         } else {
-            MerchantLoginReturn merchantLoginReturn = new MerchantLoginReturn(merchant.getAccount(), MERCHANT_ROLE_KEY, LOGIN_ERROR_002,null,null);
+            MerchantLoginReturn merchantLoginReturn = new MerchantLoginReturn(merchant.getAccount(), MERCHANT_ROLE_KEY, LOGIN_ERROR_002, null, null);
             return new LoginResponse(LOGIN_FAIL_KEY, merchantLoginReturn);
         }
 
@@ -98,11 +94,10 @@ public class IMerchantServiceImpl implements IMerchantService {
     @Override
     public SystemResponse updateByIdSelective(Merchant record) {
         record.setUpdateTime(new Date());
-        if(merchantRepository.updateByPrimaryKeySelective(record) == 1){
-            return new SystemResponse(SYSTEM_SUCCESS_KEY,new MerchantCommonReturn(record.getAccount(),MERCHANT_UPDATE_SUCESS));
-        }
-        else {
-            return new SystemResponse(SYSTEM_FAIL_KEY,new MerchantCommonReturn(record.getAccount(),MERCHANT_UPDATE_FAIL));
+        if (merchantRepository.updateByPrimaryKeySelective(record) == 1) {
+            return new SystemResponse(SYSTEM_SUCCESS_KEY, new MerchantCommonReturn(record.getAccount(), MERCHANT_UPDATE_SUCESS));
+        } else {
+            return new SystemResponse(SYSTEM_FAIL_KEY, new MerchantCommonReturn(record.getAccount(), MERCHANT_UPDATE_FAIL));
         }
     }
 
@@ -111,7 +106,7 @@ public class IMerchantServiceImpl implements IMerchantService {
         MerchantData merchantData = new MerchantData();
         merchantData.setMerchant(merchantRepository.selectByAccount(merchant.getAccount()));
         merchantData.setCompany(companyRepository.selectByAccount(merchant.getAccount()));
-        return new SystemResponse<>(SYSTEM_SUCCESS_KEY,merchantData);
+        return new SystemResponse<>(SYSTEM_SUCCESS_KEY, merchantData);
     }
 
     @Override

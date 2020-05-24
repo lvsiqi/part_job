@@ -11,17 +11,17 @@
 
     <artifactId>part_jop-service</artifactId>
     <packaging>jar</packaging>
-<dependencies>
-    <dependency>
-        <groupId>com.lsq</groupId>
-        <artifactId>part_job-repository</artifactId>
-        <version>${project.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.lsq</groupId>
-        <artifactId>part_job-utils</artifactId>
-        <version>${project.version}</version>
-    </dependency>
-</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.lsq</groupId>
+            <artifactId>part_job-repository</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lsq</groupId>
+            <artifactId>part_job-utils</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

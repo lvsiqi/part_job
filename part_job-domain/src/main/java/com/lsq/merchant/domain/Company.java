@@ -3,15 +3,15 @@ package com.lsq.merchant.domain;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 /**
+ * @Description: java类作用描述
 
- * @Description:    java类作用描述
+ * @Author: lvsiqi
 
- * @Author:         lvsiqi
+ * @CreateDate: 2019/4/3 16:33
 
- * @CreateDate:     2019/4/3 16:33
- 
  */
 public class Company {
     private Long id;

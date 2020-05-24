@@ -19,7 +19,7 @@ public interface IJobTypeConfigRepository {
 
     int updateByPrimaryKey(JobTypeConfig record);
 
-    List<String > selectByGroup(String groupName);
+    List<String> selectByGroup(String groupName);
 
     List<String> selectAllGroup();
 }

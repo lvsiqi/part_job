@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public class IApplyForJobRepositoryImpl implements IApplyForJobRepository {
     @Autowired
     private ApplyForJobMapper applyForJobMapper;
+
     @Override
     public int deleteByPrimaryKey(Long id) {
         return applyForJobMapper.deleteByPrimaryKey(id);
@@ -59,7 +61,7 @@ public class IApplyForJobRepositoryImpl implements IApplyForJobRepository {
 
     @Override
     public int selectCountBySearchFactor(QueryApplyJob queryApplyJob) {
-       return applyForJobMapper.selectCountBySearchFactor(queryApplyJob);
+        return applyForJobMapper.selectCountBySearchFactor(queryApplyJob);
     }
 
     @Override

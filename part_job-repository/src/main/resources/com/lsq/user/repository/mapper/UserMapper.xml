@@ -16,8 +16,8 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, account, password, head_img, name, sex, age, tel, address, state, create_time, update_time
-  </sql>
+        id, account, password, head_img, name, sex, age, tel, address, state, create_time, update_time
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -39,19 +39,21 @@
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" parameterType="com.lsq.user.domain.User">
-    insert into user (id, account, password, head_img,
-      name, sex, age, tel, 
-      address, state, create_time, update_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR},
-      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR},#{state,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
+        insert into user (id, account, password, head_img,
+        name, sex, age, tel,
+        address, state, create_time, update_time
+        )
+        values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        #{headImg,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR},
+        #{address,jdbcType=VARCHAR},#{state,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
     <insert id="insertSelective" parameterType="com.lsq.user.domain.User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -212,18 +214,18 @@
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.lsq.user.domain.User">
-    update user
-    set account = #{account,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      head_img = #{headImg,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      age = #{age,jdbcType=VARCHAR},
-      tel = #{tel,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      state = #{state,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update user
+        set account = #{account,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        head_img = #{headImg,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=VARCHAR},
+        age = #{age,jdbcType=VARCHAR},
+        tel = #{tel,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
+        state = #{state,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

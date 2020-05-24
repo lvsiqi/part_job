@@ -36,15 +36,15 @@ public class UserApplyJobController {
 
     @RequestMapping("/apply")
     @ResponseBody
-    public BaseResponse applyJob(@RequestBody  ApplyForJob applyForJob) {
+    public BaseResponse applyJob(@RequestBody ApplyForJob applyForJob) {
         SystemResponse result = applyForJobService.applyJob(applyForJob);
-        if(StringUtils.equals(result.getState(),SYSTEM_SUCCESS_KEY)){
+        if (StringUtils.equals(result.getState(), SYSTEM_SUCCESS_KEY)) {
             MyMessages systemMessage = new MyMessages();
             systemMessage.setType(MESSAGE_TYPE_SYSTEM);
             systemMessage.setState(MESSAGE_STATE_UNREAD);
             systemMessage.setSendAccount(applyForJob.getUserAccount());
             systemMessage.setAcceptAccount(applyForJob.getMerchantAccount());
-            systemMessage.setContent("用户"+applyForJob.getUserAccount()+"申请了工作");
+            systemMessage.setContent("用户" + applyForJob.getUserAccount() + "申请了工作");
             systemMessage.setCreateTime(new Date());
             messageService.add(systemMessage);
             WebSocketServer.sendInfo(systemMessage);
@@ -54,7 +54,7 @@ public class UserApplyJobController {
 
     @RequestMapping("/select_apply_by_factor")
     @ResponseBody
-    public BaseResponse selectByMerchantAccount(@RequestBody  QueryApplyJob queryApplyJob){
+    public BaseResponse selectByMerchantAccount(@RequestBody QueryApplyJob queryApplyJob) {
         return applyForJobService.selectApplyBySearchFactor(queryApplyJob);
     }
 }

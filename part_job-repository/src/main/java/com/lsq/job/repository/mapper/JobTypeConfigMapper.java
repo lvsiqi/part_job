@@ -15,7 +15,7 @@ public interface JobTypeConfigMapper {
 
     JobTypeConfig selectByPrimaryKey(Long id);
 
-    List<String > selectByGroup(String groupName);
+    List<String> selectByGroup(String groupName);
 
     List<String> selectAllGroup();
 

@@ -22,6 +22,7 @@ import static com.lsq.constants.SystemConstants.SYSTEM_SUCCESS_KEY;
 public class IMessageServiceImpl implements IMessageService {
     @Autowired
     private IMyMessagesRepository myMessagesRepository;
+
     @Override
     public int deleteById(Long id) {
         return myMessagesRepository.deleteByPrimaryKey(id);
@@ -45,12 +46,11 @@ public class IMessageServiceImpl implements IMessageService {
     @Override
     public SystemResponse selectByFactor(QueryMessageBean queryMessageBean) {
         List<MyMessages> messagesList = myMessagesRepository.selectByFactor(queryMessageBean);
-        Map<String,ArrayList<Content>> results = new HashMap<>(5);
-        for(MyMessages temp : messagesList)
-        {
+        Map<String, ArrayList<Content>> results = new HashMap<>(5);
+        for (MyMessages temp : messagesList) {
             boolean flag = true;
-            for (Map.Entry<String,ArrayList<Content>> entry : results.entrySet()) {
-                if(entry.getKey().equals(temp.getSendAccount())){
+            for (Map.Entry<String, ArrayList<Content>> entry : results.entrySet()) {
+                if (entry.getKey().equals(temp.getSendAccount())) {
                     Content content = new Content();
                     content.setText(temp.getContent());
                     content.setFlag("accept");
@@ -60,21 +60,21 @@ public class IMessageServiceImpl implements IMessageService {
                     break;
                 }
             }
-            if(flag) {
+            if (flag) {
                 ArrayList<Content> a = new ArrayList<>();
                 Content content = new Content();
                 content.setText(temp.getContent());
                 content.setFlag("accept");
                 content.setCreateTime(temp.getCreateTime());
                 a.add(content);
-                results.put(temp.getSendAccount(),a);
+                results.put(temp.getSendAccount(), a);
             }
         }
-        return new SystemResponse<Map>(SYSTEM_SUCCESS_KEY,results);
+        return new SystemResponse<Map>(SYSTEM_SUCCESS_KEY, results);
     }
 
     @Override
     public int updateMessage(MyMessages record) {
-        return  myMessagesRepository.updateByPrimaryKeySelective(record);
+        return myMessagesRepository.updateByPrimaryKeySelective(record);
     }
 }

@@ -8,13 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 /**
+ * @Description: java类作用描述
 
- * @Description:    java类作用描述
+ * @Author: lvsiqi
 
- * @Author:         lvsiqi
+ * @CreateDate: 2019/3/25 11:00
 
- * @CreateDate:     2019/3/25 11:00
- 
  */
 public class MerchantCommonReturn {
     private String account;

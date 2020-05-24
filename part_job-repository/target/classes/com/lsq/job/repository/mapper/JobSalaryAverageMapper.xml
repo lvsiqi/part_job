@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lsq.job.repository.mapper.JobSalaryAverageMapper" >
-  <resultMap id="BaseResultMap" type="com.lsq.job.domain.JobSalaryAverage" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="job_id" property="jobId" jdbcType="BIGINT" />
-    <result column="avg_salary" property="avgSalary" jdbcType="REAL" />
-    <result column="account" property="account" jdbcType="VARCHAR" />
-    <result column="job_type" property="jobType" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, job_id, avg_salary, account, job_type
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from job_salary_average
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+<mapper namespace="com.lsq.job.repository.mapper.JobSalaryAverageMapper">
+    <resultMap id="BaseResultMap" type="com.lsq.job.domain.JobSalaryAverage">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="job_id" property="jobId" jdbcType="BIGINT"/>
+        <result column="avg_salary" property="avgSalary" jdbcType="REAL"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="job_type" property="jobType" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, job_id, avg_salary, account, job_type
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from job_salary_average
+        where id = #{id,jdbcType=BIGINT}
+    </select>
 
-  <select id="selectAvgSalaryByType" resultType="com.lsq.job.bean.JobTypeAvgSalary"  >
-    select job_type as jobType,ROUND(AVG(avg_salary),2) as "typeAvgSalary" FROM job_salary_average GROUP BY job_type
-  </select>
+    <select id="selectAvgSalaryByType" resultType="com.lsq.job.bean.JobTypeAvgSalary">
+        select job_type as jobType,ROUND(AVG(avg_salary),2) as "typeAvgSalary" FROM job_salary_average GROUP BY job_type
+    </select>
 
-  <delete id="deleteByJobId" parameterType="java.lang.Long" >
-    delete from job_salary_average
-    where job_id = #{jobId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insertSelective" parameterType="com.lsq.job.domain.JobSalaryAverage" >
-    insert into job_salary_average
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="jobId != null" >
-        job_id,
-      </if>
-      <if test="avgSalary != null" >
-        avg_salary,
-      </if>
-      <if test="account != null" >
-        account,
-      </if>
-      <if test="jobType != null" >
-        job_type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="jobId != null" >
-        #{jobId,jdbcType=BIGINT},
-      </if>
-      <if test="avgSalary != null" >
-        #{avgSalary,jdbcType=REAL},
-      </if>
-      <if test="account != null" >
-        #{account,jdbcType=VARCHAR},
-      </if>
-      <if test="jobType != null" >
-        #{jobType,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByJobIdSelective" parameterType="com.lsq.job.domain.JobSalaryAverage" >
-    update job_salary_average
-    <set >
-      <if test="avgSalary != null" >
-        avg_salary = #{avgSalary,jdbcType=REAL},
-      </if>
-      <if test="account != null" >
-        account = #{account,jdbcType=VARCHAR},
-      </if>
-      <if test="jobType != null" >
-        job_type = #{jobType,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where job_id = #{jobId,jdbcType=BIGINT}
-  </update>
+    <delete id="deleteByJobId" parameterType="java.lang.Long">
+        delete from job_salary_average
+        where job_id = #{jobId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insertSelective" parameterType="com.lsq.job.domain.JobSalaryAverage">
+        insert into job_salary_average
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="jobId != null">
+                job_id,
+            </if>
+            <if test="avgSalary != null">
+                avg_salary,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="jobType != null">
+                job_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="jobId != null">
+                #{jobId,jdbcType=BIGINT},
+            </if>
+            <if test="avgSalary != null">
+                #{avgSalary,jdbcType=REAL},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="jobType != null">
+                #{jobType,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByJobIdSelective" parameterType="com.lsq.job.domain.JobSalaryAverage">
+        update job_salary_average
+        <set>
+            <if test="avgSalary != null">
+                avg_salary = #{avgSalary,jdbcType=REAL},
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="jobType != null">
+                job_type = #{jobType,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where job_id = #{jobId,jdbcType=BIGINT}
+    </update>
 </mapper>

@@ -3,15 +3,15 @@ package com.lsq.user.domain;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 /**
+ * @Description: java类作用描述
 
- * @Description:    java类作用描述
+ * @Author: lvsiqi
 
- * @Author:         lvsiqi
+ * @CreateDate: 2019/4/21 20:17
 
- * @CreateDate:     2019/4/21 20:17
- 
  */
 public class User {
     private Long id;

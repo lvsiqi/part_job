@@ -10,13 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/4/21 21:33
- 
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/4/21 21:33
  */
 @Controller
 @RequestMapping("/user")
@@ -26,19 +22,19 @@ public class UserBaseController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public BaseResponse login(@RequestBody User user){
+    public BaseResponse login(@RequestBody User user) {
         return userService.userLoginCheck(user);
     }
 
     @RequestMapping("/register")
     @ResponseBody
-    public BaseResponse register(@RequestBody  User user){
+    public BaseResponse register(@RequestBody User user) {
         return userService.userRegister(user);
     }
 
     @RequestMapping("/update")
     @ResponseBody
-    public BaseResponse update(@RequestBody User user){
+    public BaseResponse update(@RequestBody User user) {
         return userService.userUpdate(user);
     }
 }

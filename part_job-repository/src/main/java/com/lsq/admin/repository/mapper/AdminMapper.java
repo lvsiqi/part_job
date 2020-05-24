@@ -1,5 +1,7 @@
 package com.lsq.admin.repository.mapper;
+
 import com.lsq.admin.domain.Admin;
+
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer id);
 

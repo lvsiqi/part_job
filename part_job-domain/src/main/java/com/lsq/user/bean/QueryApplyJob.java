@@ -4,15 +4,15 @@ import lombok.Data;
 
 @Data
 public class QueryApplyJob {
-    private  Long id;
+    private Long id;
 
-    private  Long jobId;
+    private Long jobId;
 
-    private  String merchantAccount;
+    private String merchantAccount;
 
-    private  String userAccount;
+    private String userAccount;
 
-    private  String state;
+    private String state;
 
     private int pageNum;
 

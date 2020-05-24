@@ -50,28 +50,27 @@ public class IPartTimeJobServiceImpl implements IPartTimeJobService {
     }
 
     @Override
-   public List<JobTypeReturn> selectAllJobType() {
-       List<JobTypeConfig> temps = jobTypeConfigRepository.selectAll();
+    public List<JobTypeReturn> selectAllJobType() {
+        List<JobTypeConfig> temps = jobTypeConfigRepository.selectAll();
         ArrayList<JobTypeReturn> results = new ArrayList<>();
-        Map<String,ArrayList<String>> tempMap = new HashMap<>(5);
-        for(JobTypeConfig temp : temps)
-        {
+        Map<String, ArrayList<String>> tempMap = new HashMap<>(5);
+        for (JobTypeConfig temp : temps) {
             boolean flag = true;
-            for (Map.Entry<String,ArrayList<String>> entry : tempMap.entrySet()) {
-                if(entry.getKey().equals(temp.getGroup())){
+            for (Map.Entry<String, ArrayList<String>> entry : tempMap.entrySet()) {
+                if (entry.getKey().equals(temp.getGroup())) {
                     tempMap.get(temp.getGroup()).add(temp.getValue());
                     flag = false;
                     break;
                 }
             }
-            if(flag) {
+            if (flag) {
                 ArrayList<String> a = new ArrayList<>();
                 a.add(temp.getValue());
-                tempMap.put(temp.getGroup(),a);
+                tempMap.put(temp.getGroup(), a);
             }
         }
-        for (Map.Entry<String,ArrayList<String>> entry : tempMap.entrySet()) {
-            JobTypeReturn jobTypeReturn =new JobTypeReturn();
+        for (Map.Entry<String, ArrayList<String>> entry : tempMap.entrySet()) {
+            JobTypeReturn jobTypeReturn = new JobTypeReturn();
             jobTypeReturn.setGroup(entry.getKey());
             jobTypeReturn.setValues(entry.getValue());
             results.add(jobTypeReturn);
@@ -82,23 +81,22 @@ public class IPartTimeJobServiceImpl implements IPartTimeJobService {
 
     @Override
     public BaseResponse selectJobPageByAccount(QueryPageBean queryPageBean) {
-        if(queryPageBean != null) {
+        if (queryPageBean != null) {
             queryPageBean.setLimitStart((queryPageBean.getPageNum() - 1) * queryPageBean.getPageSize());
             int total = partTimeJobRepository.selectCountByAccount(queryPageBean.getAccount());
             List<PartTimeJob> partTimeJobs = partTimeJobRepository.selectPageByAccount(queryPageBean);
             return new SystemResponse<>(SYSTEM_SUCCESS_KEY, new JobPageBean(total, partTimeJobs));
-        }
-        else {
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,null);
+        } else {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, null);
         }
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResponse deleteById(Long id) {
-        if(partTimeJobRepository.deleteByPrimaryKey(id) == 1 && jobSalaryAverageRepository.deleteByJobId(id) == 1){
-            return new SystemResponse<>(SYSTEM_SUCCESS_KEY,null);
-        }else {
+        if (partTimeJobRepository.deleteByPrimaryKey(id) == 1 && jobSalaryAverageRepository.deleteByJobId(id) == 1) {
+            return new SystemResponse<>(SYSTEM_SUCCESS_KEY, null);
+        } else {
             return new SystemResponse<>(SYSTEM_FAIL_KEY, null);
         }
     }
@@ -106,49 +104,46 @@ public class IPartTimeJobServiceImpl implements IPartTimeJobService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResponse updateById(PartTimeJob record) {
-        if(partTimeJobRepository.updateByPrimaryKeySelective(record) == 1 && jobSalaryAverageRepository.updateByJobIdSelective(this.getSalaryAverage(record)) == 1){
-            return new SystemResponse<>(SYSTEM_SUCCESS_KEY,null);
-        }else {
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,null);
+        if (partTimeJobRepository.updateByPrimaryKeySelective(record) == 1 && jobSalaryAverageRepository.updateByJobIdSelective(this.getSalaryAverage(record)) == 1) {
+            return new SystemResponse<>(SYSTEM_SUCCESS_KEY, null);
+        } else {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, null);
         }
     }
 
     @Override
     public BaseResponse selectJobPageByName(QueryPageBean queryPageBean) {
-        if(queryPageBean != null) {
+        if (queryPageBean != null) {
             queryPageBean.setLimitStart((queryPageBean.getPageNum() - 1) * queryPageBean.getPageSize());
             int total = partTimeJobRepository.selectCountByName(queryPageBean.getJobName());
             List<PartTimeJob> partTimeJobs = partTimeJobRepository.selectPageByName(queryPageBean);
             return new SystemResponse<>(SYSTEM_SUCCESS_KEY, new JobPageBean(total, partTimeJobs));
-        }
-        else {
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,null);
+        } else {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, null);
         }
     }
 
     @Override
     public BaseResponse selectJobPageAll(QueryPageBean queryPageBean) {
-        if(queryPageBean != null) {
+        if (queryPageBean != null) {
             queryPageBean.setLimitStart((queryPageBean.getPageNum() - 1) * queryPageBean.getPageSize());
             int total = partTimeJobRepository.selectCountAll();
             List<PartTimeJob> partTimeJobs = partTimeJobRepository.selectPageAll(queryPageBean);
             return new SystemResponse<>(SYSTEM_SUCCESS_KEY, new JobPageBean(total, partTimeJobs));
-        }
-        else {
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,null);
+        } else {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, null);
         }
     }
 
     @Override
     public BaseResponse selectPageByFactor(QueryPageBean queryPageBean) {
-        if(queryPageBean != null) {
+        if (queryPageBean != null) {
             queryPageBean.setLimitStart((queryPageBean.getPageNum() - 1) * queryPageBean.getPageSize());
             int total = partTimeJobRepository.selectCountByFactor(queryPageBean);
             List<PartTimeJob> partTimeJobs = partTimeJobRepository.selectPageByFactor(queryPageBean);
             return new SystemResponse<>(SYSTEM_SUCCESS_KEY, new JobPageBean(total, partTimeJobs));
-        }
-        else {
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,null);
+        } else {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, null);
         }
     }
 
@@ -158,8 +153,7 @@ public class IPartTimeJobServiceImpl implements IPartTimeJobService {
     }
 
 
-
-    public JobSalaryAverage getSalaryAverage(PartTimeJob partTimeJob){
+    public JobSalaryAverage getSalaryAverage(PartTimeJob partTimeJob) {
         JobSalaryAverage jobSalaryAverage = new JobSalaryAverage();
         jobSalaryAverage.setAccount(partTimeJob.getAccount());
         jobSalaryAverage.setAvgSalary(partTimeJob.getAvgSalary());

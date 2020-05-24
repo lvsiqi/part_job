@@ -29,13 +29,9 @@ import static com.lsq.constants.SystemConstants.*;
 import static com.lsq.constants.UserConstants.*;
 
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/4/21 21:01
-
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/4/21 21:01
  */
 @Service
 public class IUserServiceImpl implements IUserService {
@@ -58,16 +54,16 @@ public class IUserServiceImpl implements IUserService {
     public BaseResponse userLoginCheck(User user) {
         User result = userRepository.selectByAccount(user.getAccount());
         UserDetail detail = userDetailRepository.selectByAccount(user.getAccount());
-        if(detail == null){
+        if (detail == null) {
             detail = new UserDetail();
         }
-        if(result == null){
-            return new LoginResponse<>(LOGIN_FAIL_KEY,new UserLoginReturn(user,detail,LOGIN_ERROR_001));
+        if (result == null) {
+            return new LoginResponse<>(LOGIN_FAIL_KEY, new UserLoginReturn(user, detail, LOGIN_ERROR_001));
         }
-        if(StringUtils.equals(user.getPassword(),result.getPassword())){
-            return new LoginResponse<>(LOGIN_SUCCESS_KEY,new UserLoginReturn(result,detail,LOGIN_SUCCESS_DESCRIPTION));
-        }else {
-            return new LoginResponse<>(LOGIN_FAIL_KEY,new UserLoginReturn(user,detail,LOGIN_ERROR_002));
+        if (StringUtils.equals(user.getPassword(), result.getPassword())) {
+            return new LoginResponse<>(LOGIN_SUCCESS_KEY, new UserLoginReturn(result, detail, LOGIN_SUCCESS_DESCRIPTION));
+        } else {
+            return new LoginResponse<>(LOGIN_FAIL_KEY, new UserLoginReturn(user, detail, LOGIN_ERROR_002));
         }
     }
 
@@ -77,23 +73,23 @@ public class IUserServiceImpl implements IUserService {
         Merchant db2 = merchantRepository.selectByAccount(user.getAccount());
         user.setCreateTime(new Date());
         user.setState(USER_STATE_001);
-        if(db != null || db2 != null){
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,USER_REGISTER_ERROR_001);
-        }else if(userRepository.insertSelective(user) == 1){
-            return new SystemResponse<>(SYSTEM_SUCCESS_KEY,USER_REGISTER_SUCCESS);
-        }else {
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,USER_REGISTER_SUCCESS);
+        if (db != null || db2 != null) {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, USER_REGISTER_ERROR_001);
+        } else if (userRepository.insertSelective(user) == 1) {
+            return new SystemResponse<>(SYSTEM_SUCCESS_KEY, USER_REGISTER_SUCCESS);
+        } else {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, USER_REGISTER_SUCCESS);
         }
     }
 
     @Override
     public BaseResponse userUpdate(User user) {
         user.setUpdateTime(new Date());
-        if(userRepository.updateByAccountSelective(user) != 1){
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,USER_UPDATE_FAIL);
-        }else {
+        if (userRepository.updateByAccountSelective(user) != 1) {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, USER_UPDATE_FAIL);
+        } else {
             User temp = userRepository.selectByAccount(user.getAccount());
-            return new SystemResponse<>(SYSTEM_SUCCESS_KEY,temp);
+            return new SystemResponse<>(SYSTEM_SUCCESS_KEY, temp);
         }
     }
 
@@ -101,32 +97,31 @@ public class IUserServiceImpl implements IUserService {
     public BaseResponse userCF(User user) {
         List<String> accountList = userRepository.selectAllAccount();
         List<UserItems> userItemsList = new ArrayList<>();
-        for(String account : accountList){
+        for (String account : accountList) {
             UserItems userItems = new UserItems();
             List<Long> tempItems = applyForJobRepository.selectJobIdByUserAccount(account);
             userItems.setAccount(account);
-            if(tempItems == null || tempItems.size()==0) {
+            if (tempItems == null || tempItems.size() == 0) {
                 continue;
             }
             userItems.setItems(tempItems);
             userItemsList.add(userItems);
         }
-        if(applyForJobRepository.selectByUserAccount(user.getAccount())== null ||applyForJobRepository.selectByUserAccount(user.getAccount()).size()==0 ){
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,"用户无行为记录");
+        if (applyForJobRepository.selectByUserAccount(user.getAccount()) == null || applyForJobRepository.selectByUserAccount(user.getAccount()).size() == 0) {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, "用户无行为记录");
         }
-        Map<Long,Double> results =UserCF.userCF(userItemsList,user.getAccount(),SYSTEM_RECOMMEND_TOP);
+        Map<Long, Double> results = UserCF.userCF(userItemsList, user.getAccount(), SYSTEM_RECOMMEND_TOP);
         List<Map.Entry<Long, Double>> list = new ArrayList<>(results.entrySet());
         list.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
         results.clear();
-        for(Map.Entry<Long, Double> mapEntry : list){
-            results.put(mapEntry.getKey(),mapEntry.getValue());
+        for (Map.Entry<Long, Double> mapEntry : list) {
+            results.put(mapEntry.getKey(), mapEntry.getValue());
         }
         Iterator it = results.entrySet().iterator();
         List<Long> topN = new ArrayList<>();
         int num = 0;
-        while(it.hasNext())
-        {
-            if(num >= JOB_RECOMMEND_TOP){
+        while (it.hasNext()) {
+            if (num >= JOB_RECOMMEND_TOP) {
                 break;
             }
             Map.Entry entity = (Map.Entry) it.next();
@@ -134,28 +129,28 @@ public class IUserServiceImpl implements IUserService {
             num++;
         }
         List<PartTimeJob> recommends = new ArrayList<>();
-        for(Long jobId : topN){
-           recommends.add(partTimeJobRepository.selectByPrimaryKey(jobId));
+        for (Long jobId : topN) {
+            recommends.add(partTimeJobRepository.selectByPrimaryKey(jobId));
         }
-        return new SystemResponse<>(SYSTEM_SUCCESS_KEY,recommends);
+        return new SystemResponse<>(SYSTEM_SUCCESS_KEY, recommends);
     }
 
     @Override
     public BaseResponse selectByUserDetail(UserDetail userDetail) {
-        QueryPageBean queryPageBean =new QueryPageBean();
-       if(userDetail.getLabelList().length==0){
-           queryPageBean.setLimitStart(0);
-           queryPageBean.setPageSize(10);
-           return new SystemResponse<>(SYSTEM_SUCCESS_KEY,partTimeJobRepository.selectPageByFactor(queryPageBean));
-       }else {
-           List<PartTimeJob> results = new ArrayList<>();
-           for(String type : userDetail.getLabelList()){
-               queryPageBean.setLimitStart(0);
-               queryPageBean.setPageSize(10);
-               queryPageBean.setJobType(type);
-               results.addAll(partTimeJobRepository.selectPageByFactor(queryPageBean));
-           }
-           return new SystemResponse<>(SYSTEM_SUCCESS_KEY,results);
-       }
+        QueryPageBean queryPageBean = new QueryPageBean();
+        if (userDetail.getLabelList().length == 0) {
+            queryPageBean.setLimitStart(0);
+            queryPageBean.setPageSize(10);
+            return new SystemResponse<>(SYSTEM_SUCCESS_KEY, partTimeJobRepository.selectPageByFactor(queryPageBean));
+        } else {
+            List<PartTimeJob> results = new ArrayList<>();
+            for (String type : userDetail.getLabelList()) {
+                queryPageBean.setLimitStart(0);
+                queryPageBean.setPageSize(10);
+                queryPageBean.setJobType(type);
+                results.addAll(partTimeJobRepository.selectPageByFactor(queryPageBean));
+            }
+            return new SystemResponse<>(SYSTEM_SUCCESS_KEY, results);
+        }
     }
 }

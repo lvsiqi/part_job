@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class IUserRepositoryImpl implements IUserRepository {
     @Autowired
-    private  UserMapper userMapper;
+    private UserMapper userMapper;
 
     @Override
     public int deleteByPrimaryKey(Long id) {
@@ -54,7 +54,7 @@ public class IUserRepositoryImpl implements IUserRepository {
     }
 
     @Override
-    public List<String>selectAllAccount(){
+    public List<String> selectAllAccount() {
         return userMapper.selectAllAccount();
     }
 }

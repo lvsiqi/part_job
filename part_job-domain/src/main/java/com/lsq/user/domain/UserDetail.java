@@ -7,13 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/5/2 10:20
- 
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/5/2 10:20
  */
 @Data
 public class UserDetail {
@@ -31,10 +27,10 @@ public class UserDetail {
 
     private String evaluation = "";
 
-    private String[] labelList ;
+    private String[] labelList;
 
-    public void labelConvert(){
-        if(this.getLabelList() != null) {
+    public void labelConvert() {
+        if (this.getLabelList() != null) {
             StringBuffer temp = new StringBuffer();
             for (String labelString : this.getLabelList()) {
                 temp.append(labelString);

@@ -10,13 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/5/7 16:52
- 
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/5/7 16:52
  */
 @Controller
 @RequestMapping("/city")

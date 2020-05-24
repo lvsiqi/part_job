@@ -16,7 +16,7 @@ public interface PartTimeJobMapper {
 
     List<PartTimeJob> selectPageByAccount(QueryPageBean queryPageBean);
 
-    int selectCountByAccount (String account);
+    int selectCountByAccount(String account);
 
     int updateByPrimaryKeySelective(PartTimeJob record);
 
@@ -24,7 +24,7 @@ public interface PartTimeJobMapper {
 
     List<PartTimeJob> selectPageByName(QueryPageBean queryPageBean);
 
-    int selectCountByName (String jobName);
+    int selectCountByName(String jobName);
 
     List<PartTimeJob> selectPageAll(QueryPageBean queryPageBean);
 

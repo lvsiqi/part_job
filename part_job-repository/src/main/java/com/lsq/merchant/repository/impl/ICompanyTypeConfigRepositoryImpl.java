@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public class ICompanyTypeConfigRepositoryImpl implements ICompanyTypeConfigRepository {
     @Autowired
     private CompanyTypeConfigMapper companyTypeConfigMapper;
+
     @Override
     public int deleteByPrimaryKey(Long id) {
         return 0;

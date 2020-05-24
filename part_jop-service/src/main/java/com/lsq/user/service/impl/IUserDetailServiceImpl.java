@@ -15,13 +15,9 @@ import static com.lsq.constants.SystemConstants.SYSTEM_SUCCESS_KEY;
 import static com.lsq.constants.UserConstants.*;
 
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/5/2 10:35
-
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/5/2 10:35
  */
 @Service
 public class IUserDetailServiceImpl implements IUserDetailService {
@@ -29,37 +25,38 @@ public class IUserDetailServiceImpl implements IUserDetailService {
     private IUserDetailRepository userDetailRepository;
     @Autowired
     private IUserRepository userRepository;
+
     @Override
     public BaseResponse deleteByAccount(String account) {
-        return new SystemResponse<>(SYSTEM_SUCCESS_KEY,userDetailRepository.deleteByAccount(account));
+        return new SystemResponse<>(SYSTEM_SUCCESS_KEY, userDetailRepository.deleteByAccount(account));
     }
 
     @Override
     public BaseResponse addUserDetail(UserDetail record) {
-        if(userRepository.selectByAccount(record.getAccount()) == null){
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,USER_DETAIL_UPDATE_ERROR_001);
+        if (userRepository.selectByAccount(record.getAccount()) == null) {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, USER_DETAIL_UPDATE_ERROR_001);
         }
-        if(userDetailRepository.selectByAccount(record.getAccount()) != null){
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,USER_DETAIL_UPDATE_ERROR_002);
+        if (userDetailRepository.selectByAccount(record.getAccount()) != null) {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, USER_DETAIL_UPDATE_ERROR_002);
         }
-         if(userDetailRepository.insertSelective(record) == 1){
-            return new SystemResponse<>(SYSTEM_SUCCESS_KEY,userDetailRepository.selectByAccount(record.getAccount()));
-        }else {
-            return new SystemResponse<>(SYSTEM_FAIL_KEY,USER_UPDATE_FAIL);
+        if (userDetailRepository.insertSelective(record) == 1) {
+            return new SystemResponse<>(SYSTEM_SUCCESS_KEY, userDetailRepository.selectByAccount(record.getAccount()));
+        } else {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, USER_UPDATE_FAIL);
         }
     }
 
     @Override
     public BaseResponse selectByAccount(String account) {
-        return new SystemResponse<>(SYSTEM_SUCCESS_KEY,userDetailRepository.selectByAccount(account));
+        return new SystemResponse<>(SYSTEM_SUCCESS_KEY, userDetailRepository.selectByAccount(account));
     }
 
     @Override
     public BaseResponse updateUserDetail(UserDetail record) {
-       if(userDetailRepository.updateByAccountSelective(record) == 1){
-           return new SystemResponse<>(SYSTEM_SUCCESS_KEY,userDetailRepository.selectByAccount(record.getAccount()));
-       }else {
-           return  new SystemResponse<>(SYSTEM_FAIL_KEY, USER_UPDATE_FAIL);
-       }
+        if (userDetailRepository.updateByAccountSelective(record) == 1) {
+            return new SystemResponse<>(SYSTEM_SUCCESS_KEY, userDetailRepository.selectByAccount(record.getAccount()));
+        } else {
+            return new SystemResponse<>(SYSTEM_FAIL_KEY, USER_UPDATE_FAIL);
+        }
     }
 }

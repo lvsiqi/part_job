@@ -23,7 +23,7 @@ public class IUserDetailRepositoryImpl implements IUserDetailRepository {
 
     @Override
     public int insertSelective(UserDetail record) {
-        return userDetailMapper.insertSelective(record) ;
+        return userDetailMapper.insertSelective(record);
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.util.List;
 public class IJobSalaryAverageRepositoryImpl implements IJobSalaryAverageRepository {
     @Autowired
     private JobSalaryAverageMapper jobSalaryAverageMapper;
+
     @Override
     public int deleteByJobId(Long id) {
         return jobSalaryAverageMapper.deleteByJobId(id);

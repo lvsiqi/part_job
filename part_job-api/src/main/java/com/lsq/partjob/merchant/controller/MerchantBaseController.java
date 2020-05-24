@@ -12,19 +12,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import static com.lsq.constants.MerchantConstants.MERCHANT_STATE_002;
 
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/4/1 16:59
- 
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/4/1 16:59
  */
 @Controller
 @RequestMapping("/merchant")
 public class MerchantBaseController {
     @Autowired
     private IMerchantService merchantService;
+
     @RequestMapping("/update")
     @ResponseBody
     public BaseResponse update(@RequestBody Merchant merchant) {

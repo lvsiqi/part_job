@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.lsq.constants.SystemConstants.SYSTEM_SUCCESS_KEY;
+
 @Service
 public class IUserLabelServiceImpl implements IUserLabelService {
     @Autowired
     private IJobTypeConfigRepository jobTypeConfigRepository;
+
     @Override
     public BaseResponse getAllGroup() {
         return new SystemResponse<>(SYSTEM_SUCCESS_KEY, jobTypeConfigRepository.selectAllGroup());
@@ -25,7 +27,7 @@ public class IUserLabelServiceImpl implements IUserLabelService {
     @Override
     public BaseResponse getLabelByGroup(QueryLabel queryLabel) {
         List<UserLabelReturn> results = new ArrayList<>();
-        if(queryLabel != null) {
+        if (queryLabel != null) {
             for (String groupName : queryLabel.getGroupNames()) {
                 UserLabelReturn userLabelReturn = new UserLabelReturn();
                 userLabelReturn.setGroupName(groupName);
@@ -33,6 +35,6 @@ public class IUserLabelServiceImpl implements IUserLabelService {
                 results.add(userLabelReturn);
             }
         }
-        return new SystemResponse<>(SYSTEM_SUCCESS_KEY,results);
+        return new SystemResponse<>(SYSTEM_SUCCESS_KEY, results);
     }
 }

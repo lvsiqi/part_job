@@ -34,8 +34,8 @@ public class CompanyController {
 
     @RequestMapping("/update_company")
     @ResponseBody
-    public SystemResponse updateCompany(@RequestBody Company company){
-        return  companyService.updateCompany(company);
+    public SystemResponse updateCompany(@RequestBody Company company) {
+        return companyService.updateCompany(company);
     }
 
     @RequestMapping("/get_company_type")

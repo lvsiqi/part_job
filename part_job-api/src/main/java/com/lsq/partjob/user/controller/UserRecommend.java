@@ -18,13 +18,13 @@ public class UserRecommend {
 
     @RequestMapping("/recommend/userCF")
     @ResponseBody
-    public BaseResponse recommend(@RequestBody User user){
+    public BaseResponse recommend(@RequestBody User user) {
         return userService.userCF(user);
     }
 
     @RequestMapping("recommend/by_job_type")
     @ResponseBody
-    public BaseResponse recommendByJobType(@RequestBody UserDetail userDetail){
+    public BaseResponse recommendByJobType(@RequestBody UserDetail userDetail) {
         return userService.selectByUserDetail(userDetail);
     }
 }

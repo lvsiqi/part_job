@@ -3,14 +3,11 @@ package com.lsq.job.domain;
 import lombok.Data;
 
 import java.util.Date;
+
 /**
-
- * @Description:    java类作用描述
-
- * @Author:         lvsiqi
-
- * @CreateDate:     2019/5/7 16:52
- 
+ * @Description: java类作用描述
+ * @Author: lvsiqi
+ * @CreateDate: 2019/5/7 16:52
  */
 @Data
 public class PartTimeJob {
@@ -36,7 +33,7 @@ public class PartTimeJob {
 
     private String salary;
 
-    private float  avgSalary;
+    private float avgSalary;
 
     private String payMethod;
 
@@ -56,15 +53,15 @@ public class PartTimeJob {
 
     private Date endTime;
 
-    private void setSalary(String salary){
+    private void setSalary(String salary) {
         this.salary = salary;
         String[] salaryArray = salary.split("/");
         float temp = Float.parseFloat(salaryArray[0]);
-        if("小时".equals(salaryArray[1])){
+        if ("小时".equals(salaryArray[1])) {
             this.avgSalary = temp * 8;
-        }else if("天".equals(salaryArray[1])){
+        } else if ("天".equals(salaryArray[1])) {
             this.avgSalary = temp;
-        }else if("月".equals(salaryArray[1])){
+        } else if ("月".equals(salaryArray[1])) {
             this.avgSalary = temp / 30;
         }
     }

@@ -1,92 +1,92 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lsq.job.repository.mapper.JobTypeConfigMapper" >
-  <resultMap id="BaseResultMap" type="com.lsq.job.domain.JobTypeConfig" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="job_group" property="group" jdbcType="VARCHAR" />
-    <result column="job_value" property="value" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, job_group, job_value
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from job_type_config
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+<mapper namespace="com.lsq.job.repository.mapper.JobTypeConfigMapper">
+    <resultMap id="BaseResultMap" type="com.lsq.job.domain.JobTypeConfig">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="job_group" property="group" jdbcType="VARCHAR"/>
+        <result column="job_value" property="value" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, job_group, job_value
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from job_type_config
+        where id = #{id,jdbcType=BIGINT}
+    </select>
 
-  <select id="selectByGroup" resultType="java.lang.String" parameterType="java.lang.String" >
-    select
-    job_value
-    from job_type_config
-    where job_group = #{groupName,jdbcType=VARCHAR}
-  </select>
+    <select id="selectByGroup" resultType="java.lang.String" parameterType="java.lang.String">
+        select
+        job_value
+        from job_type_config
+        where job_group = #{groupName,jdbcType=VARCHAR}
+    </select>
 
-  <select id="selectAllGroup" resultType="java.lang.String">
-    select
-    job_group
-    from job_type_config
-    group by job_group
-  </select>
+    <select id="selectAllGroup" resultType="java.lang.String">
+        select
+        job_group
+        from job_type_config
+        group by job_group
+    </select>
 
-  <select id="selectAll" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from job_type_config
-  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from job_type_config
+    </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from job_type_config
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.lsq.job.domain.JobTypeConfig" >
-    insert into job_type_config (id, job_group, job_value
-      )
-    values (#{id,jdbcType=BIGINT}, #{group,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.lsq.job.domain.JobTypeConfig" >
-    insert into job_type_config
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="group != null" >
-        job_group,
-      </if>
-      <if test="value != null" >
-        job_value,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="group != null" >
-        #{group,jdbcType=VARCHAR},
-      </if>
-      <if test="value != null" >
-        #{value,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lsq.job.domain.JobTypeConfig" >
-    update job_type_config
-    <set >
-      <if test="group != null" >
-        job_group = #{group,jdbcType=VARCHAR},
-      </if>
-      <if test="value != null" >
-        job_value = #{value,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lsq.job.domain.JobTypeConfig" >
-    update job_type_config
-    set job_group = #{group,jdbcType=VARCHAR},
-      job_value = #{value,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from job_type_config
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lsq.job.domain.JobTypeConfig">
+        insert into job_type_config (id, job_group, job_value
+        )
+        values (#{id,jdbcType=BIGINT}, #{group,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lsq.job.domain.JobTypeConfig">
+        insert into job_type_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="group != null">
+                job_group,
+            </if>
+            <if test="value != null">
+                job_value,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="group != null">
+                #{group,jdbcType=VARCHAR},
+            </if>
+            <if test="value != null">
+                #{value,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lsq.job.domain.JobTypeConfig">
+        update job_type_config
+        <set>
+            <if test="group != null">
+                job_group = #{group,jdbcType=VARCHAR},
+            </if>
+            <if test="value != null">
+                job_value = #{value,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lsq.job.domain.JobTypeConfig">
+        update job_type_config
+        set job_group = #{group,jdbcType=VARCHAR},
+        job_value = #{value,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

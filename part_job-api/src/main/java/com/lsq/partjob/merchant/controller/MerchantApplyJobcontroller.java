@@ -28,24 +28,25 @@ public class MerchantApplyJobcontroller {
     private IApplyUserService applyUserService;
     @Autowired
     private IMessageService messageService;
+
     @RequestMapping("/select_apply_by_factor")
     @ResponseBody
-    public BaseResponse selectApplyByFactor(@RequestBody QueryApplyJob queryApplyJob){
+    public BaseResponse selectApplyByFactor(@RequestBody QueryApplyJob queryApplyJob) {
         return applyUserService.searchApplyUserByFactor(queryApplyJob);
     }
 
     @RequestMapping("/update_apply")
     @ResponseBody
-    public BaseResponse updateApply(@RequestBody ApplyForJob applyForJob){
+    public BaseResponse updateApply(@RequestBody ApplyForJob applyForJob) {
         applyForJob.setUpdateTime(new Date());
         SystemResponse result = applyUserService.updateApply(applyForJob);
-        if(StringUtils.equals(result.getState(),SYSTEM_SUCCESS_KEY)){
+        if (StringUtils.equals(result.getState(), SYSTEM_SUCCESS_KEY)) {
             MyMessages systemMessage = new MyMessages();
             systemMessage.setType(MESSAGE_TYPE_SYSTEM);
             systemMessage.setState(MESSAGE_STATE_UNREAD);
             systemMessage.setAcceptAccount(applyForJob.getUserAccount());
             systemMessage.setSendAccount(applyForJob.getMerchantAccount());
-            systemMessage.setContent("商家"+applyForJob.getUserAccount()+applyForJob.getState()+"你的申请");
+            systemMessage.setContent("商家" + applyForJob.getUserAccount() + applyForJob.getState() + "你的申请");
             systemMessage.setCreateTime(new Date());
             messageService.add(systemMessage);
             WebSocketServer.sendInfo(systemMessage);
