@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/part-time_system_lsq?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
-    password: LSQ150497l
+    username: ****
+    password: ****
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
